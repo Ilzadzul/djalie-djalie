@@ -1,3 +1,616 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Montaga&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Italiana&display=swap");
+
+:root {
+    --main-color: rgb(231, 190, 131);
+    --primary-color: #2b1105;
+    --white: #fff;
+    --bg: #f7f0ed;
+    --light-black: #333;
+    --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    --font-display: "Italiana", serif;
+
+    /* font-size: 16px; */
+}
+
+* {
+    font-family: "Montaga", "serif";
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    transition: 0.2s linear;
+    -webkit-transition: 0.2s linear;
+    -moz-transition: 0.2s linear;
+    -ms-transition: 0.2s linear;
+    -o-transition: 0.2s linear;
+    /* text-transform: capitalize; */
+}
+
+*::selection {
+    background: var(--main-color);
+    color: var(--white);
+}
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+}
+
+html::-webkit-scrollbar {
+    width: 0.8rem;
+}
+
+html::-webkit-scrollbar-track {
+    background: var(--white);
+}
+
+html::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    /* border-radius: 1rem; */
+}
+
+body {
+    background: var(--bg);
+}
+
+.loading-screen {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-screen h1 {
+    font-size: 8vw;
+}
+
+.loading-screen .loader {
+    width: 80px;
+    aspect-ratio: 1;
+    --c: #8d7958 98%, #0000;
+    background: radial-gradient(50% 70% at 50% 120%, var(--c)) top,
+        radial-gradient(70% 50% at -20% 50%, var(--c)) right,
+        radial-gradient(50% 70% at 50% -20%, var(--c)) bottom,
+        radial-gradient(70% 50% at 120% 50%, var(--c)) left;
+    background-size: 100% 50.1%, 50.1% 100%;
+    background-repeat: no-repeat;
+    mask: radial-gradient(circle 5px, #0000 90%, #000);
+    -webkit-mask: radial-gradient(circle 5px, #0000 90%, #000);
+    animation: l9 1.5s infinite linear;
+}
+@keyframes l9 {
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+section,
+footer {
+    padding: 3rem 9%;
+}
+
+.heading {
+    text-align: center;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+    font-size: 4rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 2.8rem;
+    border-radius: 5rem;
+    border-top-left-radius: 0;
+    border: 0.2rem solid var(--main-color);
+    cursor: pointer;
+    color: var(--main-color);
+    font-size: 1.7rem;
+    text-transform: capitalize;
+    overflow: hidden;
+    z-index: 0;
+    position: relative;
+}
+.btn:hover {
+    color: var(--white);
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 130%;
+    background: var(--main-color);
+    z-index: -1;
+    transform: translate(-110%, 0) skew(-30deg);
+    transition: 0.3s ease;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    -ms-transition: 0.3s ease;
+    -o-transition: 0.3s ease;
+}
+
+.btn:hover::before {
+    transform: translate(-5%, 0) skew(-15deg);
+}
+
+/* header */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 9%;
+}
+
+.header.header-colored {
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+}
+
+.header .logo {
+    max-height: 5rem;
+}
+
+.header .navbar {
+    display: flex;
+    font-size: 1.7rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .navbar ul {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-link {
+    font-size: 1.7rem;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: capitalize;
+    color: var(--primary-color);
+    position: relative;
+}
+
+.nav-link.white {
+    color: var(--white);
+}
+
+.nav-link:hover {
+    color: var(--main-color);
+}
+
+.nav-link::before {
+    transition: 0.3s ease;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    -ms-transition: 0.3s ease;
+    -o-transition: 0.3s ease;
+    height: 2px;
+    content: "";
+    position: absolute;
+    background-color: var(--main-color);
+    width: 100%;
+    top: 2.5rem;
+    opacity: 0;
+}
+
+.nav-link:hover::before {
+    top: 2.3rem;
+    opacity: 1;
+}
+
+.header .icons i {
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    font-size: 3rem;
+    border-radius: 0.5rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    color: var(--primary-color);
+    /* background: var(--main-color); */
+    text-align: center;
+}
+
+.header .icons i.white {
+    color: var(--white);
+}
+
+.header .icons i:hover {
+    color: var(--main-color);
+}
+
+#menu {
+    display: none;
+}
+
+/* /header */
+
+/* home (hero) */
+.home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("./storage/hero.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.home .content {
+    text-align: center;
+}
+
+.home .content h1 {
+    font-style: italic;
+    font-size: 6rem;
+    color: var(--white);
+    padding-bottom: 3.5rem;
+}
+
+.home .content .logo {
+    display: block;
+    padding-bottom: 3.5rem;
+    max-height: 18rem;
+    margin: 0 auto;
+}
+
+/* home (hero) end */
+
+/* about */
+.about .row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.about .row .content {
+    flex: 1 1 60rem;
+}
+
+.about .row .content h3 {
+    font-size: 3.5rem;
+    font-style: italic;
+    /* color: var(--main-color); */
+}
+
+.about .row .content p {
+    font-size: 1.6rem;
+    color: var(--light-black);
+    padding: 2rem 0;
+    line-height: 2;
+}
+.about .row .content p span {
+    font-style: italic;
+}
+
+.about .row .image {
+    flex: 1 1 40rem;
+}
+.about .row .image img {
+    width: 100%;
+}
+/* about end */
+
+/* services */
+
+.services {
+    text-align: center;
+}
+
+.services .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 2rem;
+}
+.services .box-container .box {
+    text-align: center;
+    padding: 4rem;
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+    border-radius: 5rem;
+}
+.services .box-container .box img {
+    height: 15rem;
+    margin: 1rem 0;
+    transition: 0.5s ease;
+    box-shadow: var(--box-shadow);
+}
+
+.services .box-container .box img:hover {
+    transform: scale(1.1);
+}
+
+.services .box-container .box h4 {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 1rem 0;
+    color: var(--primary-color);
+}
+.services .box-container .box p {
+    font-size: 1.5rem;
+    color: var(--light-black);
+    line-height: 2;
+}
+
+.services .btn {
+    background: var(--white);
+}
+/* services end */
+
+/* plans */
+.plans .box-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6rem;
+}
+
+.plans .box-container .box {
+    background: var(--white);
+    padding-bottom: 6rem;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    position: relative;
+    align-self: stretch;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+}
+
+.plans .box-container .box .title {
+    font-size: 2.5rem;
+    background: var(--main-color);
+    color: var(--white);
+    padding: 1rem 0;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+}
+
+.plans .box-container .box .description {
+    padding: 2rem 0.5rem;
+    font-size: 2rem;
+    color: var(--light-black);
+}
+
+.plans .box-container .box .price {
+    font-size: 2.5rem;
+    color: var(--light-black);
+    padding-top: 1rem;
+}
+
+.plans .box-container .box .price span {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.plans .box-container .box ul {
+    margin: 2rem 4rem;
+    list-style: disc;
+}
+
+.plans .box-container .box ul li {
+    text-align: start;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    color: var(--light-black);
+}
+
+.plans .box-container .box ul li i {
+    font-size: 1rem;
+    color: var(--white);
+    padding: 0.5rem;
+    margin-right: 1rem;
+    background: var(--main-color);
+    border-radius: 50%;
+}
+.plans .box-container .box .btn {
+    position: absolute;
+    bottom: -2rem;
+    right: 2rem;
+    background: var(--white);
+}
+/* plans end*/
+
+/* gallery */
+.gallery .swiper-slide {
+    overflow: hidden;
+    height: 50rem;
+    width: 35rem;
+    border-radius: 0.5rem;
+}
+.gallery .swiper-slide img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.gallery .swiper {
+    padding: 2rem 0;
+}
+/* gallery end */
+
+/* team */
+.team .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 1.5rem;
+}
+.team .box-container .box {
+    background: var(--white);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+
+.team .box-container .box img {
+    border-radius: 50%;
+    height: 15rem;
+    width: 15rem;
+    object-fit: cover;
+    object-position: top;
+    margin-bottom: 1rem;
+}
+
+.team .box-container .box h3 {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+.team .box-container .box p {
+    font-size: 1.5rem;
+    color: var(--main-color);
+    text-transform: capitalize;
+}
+/* team end */
+
+/* contact */
+.contact form {
+    text-align: center;
+}
+
+.contact form .inputBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.contact form .inputBox input,
+.contact form .inputBox select,
+.contact form .inputBox textarea {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin: 0.7rem 0;
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+    border-radius: 0.5rem;
+}
+
+.contact form .inputBox input,
+.contact form .inputBox select {
+    width: 49%;
+}
+
+.contact form .inputBox select {
+    text-transform: capitalize;
+}
+
+.contact form .inputBox textarea {
+    height: 20rem;
+    resize: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.contact form .inputBox input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.contact form .btn {
+    background: var(--white);
+}
+/* contact end */
+
+/* footer */
+
+footer {
+    background: var(--white);
+}
+
+footer .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 5rem;
+}
+footer .box-container .box {
+    padding: 1rem 0;
+}
+footer .box-container .box h3 {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    padding: 1rem 0;
+}
+footer .box-container .box p {
+    font-size: 1.5rem;
+    color: var(--main-color);
+    padding: 1rem 0;
+    line-height: 2;
+}
+footer .box-container .box a {
+    display: block;
+    font-size: 1.4rem;
+    color: var(--main-color);
+    padding: 1rem 0;
+}
+footer .box-container .box a i {
+    padding-right: 0.5rem;
+    color: var(--primary-color);
+}
+footer .box-container .box a:hover {
+    color: var(--primary-color);
+}
+
+footer .credits {
+    margin-top: 2.5rem;
+    padding: 1rem;
+    padding-top: 2rem;
+    border-top: 0.1rem solid var(--white);
+    text-align: center;
+    color: var(--main-color);
+    font-size: 2rem;
+}
+
+footer .credits span {
+    color: var(--primary-color);
+}
+
+/* footer end */
