@@ -1,6 +1,6 @@
 <?php
 // change variables
-$WHATSAPP_NUMBER = "62123123123";
+$WHATSAPP_NUMBER = "6287877164294";
 $INSTAGRAM_USERNAME = "djaliedjalie_dekorasi";
 $EMAIL = "info@djaliedjalie.com";
 $GMAPS_LINK = "https://maps.app.goo.gl/DraN31wC3acF9eEw5";

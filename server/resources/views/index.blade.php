@@ -8,9 +8,7 @@
     <title>Djalie-Djalie</title>
 
     <!-- fa -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
     <!-- swiperjs -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -21,7 +19,7 @@
 
 <body>
     <header class="header" id="header">
-        <a href="#"><img src="./storage/logo.png" class="logo" id="navbar-logo" alt="Djalie Djalie"></a>
+        <a href="#"><img src="./images/logo.png" class="logo" id="navbar-logo" alt="Djalie Djalie"></a>
         <nav class="navbar" id="navbar">
             <ul>
                 <li><a class="nav-link" href="#home">home</a></li>
@@ -45,7 +43,7 @@
     <!-- home section -->
     <section class="home" id="home">
         <div class="content">
-            <img src="./storage/logo-white.png" class="logo" alt="Djalie Djalie">
+            <img src="./images/logo-white.png" class="logo" alt="Djalie Djalie">
             <h1>Where your forever begins</h1>
             <a href="#contact" class="btn">Consult with us</a>
         </div>
@@ -68,7 +66,7 @@
             </div>
 
             <div class="image">
-                <img src="./storage/about.jpg" alt="">
+                <img src="./images/about.jpg" alt="">
             </div>
         </div>
     </section>
@@ -79,21 +77,21 @@
         <h2 class="heading">our services</h2>
         <div class="box-container">
             <div class="box">
-                <img src="./storage/services1.jpg" alt="">
+                <img src="./images/services1.jpg" alt="">
                 <h4>Makeup</h4>
                 <p>Our professional makeup artists specialize in creating timeless, elegant looks for your big day.
                     Whether you prefer a natural glow or a glamorous finish, we ensure you’ll look and feel stunning
                     throughout your celebration.</p>
             </div>
             <div class="box">
-                <img src="./storage/services2.jpg" alt="">
+                <img src="./images/services2.jpg" alt="">
                 <h4>Decorations</h4>
                 <p>Transform your wedding venue into a breathtaking setting with our decoration services. From floral
                     arrangements to custom themes, we bring your vision to life, creating unforgettable moments for you
                     and your guests.</p>
             </div>
             <div class="box">
-                <img src="./storage/services3.jpg" alt="">
+                <img src="./images/services3.jpg" alt="">
                 <h4>Photography</h4>
                 <p>Capture the magic of your special day with our expert photography team. From candid moments to
                     artistic portraits, we ensure every precious memory is beautifully preserved for a lifetime.</p>
@@ -166,11 +164,11 @@
         <h2 class="heading">gallery</h2>
         <div class="swiper swiper1">
             <div class="swiper-wrapper">
-                @for ($i = 1; $i <= 7; $i++)
+                @foreach(\App\Models\Photo::all() as $photo)
                     <div class="swiper-slide">
-                        <img src="./storage/makeup{{$i}}.jpg" />
+                        <img src="./storage/{{$photo['photo']}}" />
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </section>
@@ -180,13 +178,21 @@
     <section class="team" id="team">
         <h2 class="heading">our team</h2>
         <div class="box-container">
-            @for ($i = 1; $i <= 3; $i++)
-                <div class="box">
-                    <img src="./storage/team{{$i}}.jpg" alt="">
-                    <h3>john doe</h3>
-                    <p>wedding planner</p>
-                </div>
-            @endfor
+            <div class="box">
+                <img src="./images/team1.jpg" alt="">
+                <h3>Eva Eriza</h3>
+                <p>Business Owner</p>
+            </div>
+            <div class="box">
+                <img src="./images/team2.jpg" alt="">
+                <h3>Hendra Permana</h3>
+                <p>Field Manager</p>
+            </div>
+            <div class="box">
+                <img src="./images/team3.jpg" alt="">
+                <h3>Vicky</h3>
+                <p>Marketing Manager</p>
+            </div>
         </div>
     </section>
     <!-- team end -->
@@ -196,7 +202,7 @@
         <h2 class="heading">contact us</h2>
         <form action="" id="contactForm">
             <div class="inputBox">
-                <input type="text" name="name" id="name" placeholder="Name *" >
+                <input type="text" name="name" id="name" placeholder="Name *">
                 <select name="service" id="service">
                     <option value="" selected>Select Subject *</option>
                     <option value="makeup">makeup</option>
@@ -207,12 +213,12 @@
             </div>
 
             <div class="inputBox">
-                <input type="email" name="email" id="email" placeholder="Email" >
+                <input type="email" name="email" id="email" placeholder="Email">
                 <input type="number" name="phone" id="phone" placeholder="Phone Number">
             </div>
 
             <div class="inputBox">
-                <textarea name="message" cols="30" rows="10" placeholder="Your message... *" ></textarea>
+                <textarea name="message" cols="30" rows="10" placeholder="Your message... *"></textarea>
             </div>
             <input type="hidden" name="link" value="{{config('djalie.WHATSAPP_LINK')}}">
 
@@ -275,31 +281,6 @@
             window.open(link, "_blank");
         })
     </script>
-
-
-    <!-- <script type="text/javascript">
-        function onSubmit() {
-            var name = document.getElementById().value;
-            var email = document.querySelector('[name="email"]').value;
-            var phone = document.querySelector('[name="phone"]').value;
-            var service = document.querySelector('[name="service"]').value;
-            var message = document.querySelector('[name="message"]').value;
-            alert(name);
-
-            var wa = config('djalie.WHATSAPP_LINK');
-
-            var encoded_msg = encodeURI(message);
-            var msg = `
-                Nama: $name%0A
-                Email: $email%0A
-                Nomor Telepon: $phone%0A
-                Subject: $service%0A
-                ${encoded_msg}
-                `;
-            var link `${wa}?text=${msg}`;
-            window.open(link, "_blank");
-        }
-    </script> -->
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
