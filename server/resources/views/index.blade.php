@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Djalie-Djalie</title>
+
     <!-- fa -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
@@ -15,12 +16,35 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     @vite(['resources/js/app.js'])
+
+    <!-- vars -->
+    @php
+        $WHATSAPP_NUMBER = `62123123123`;
+        $INSTAGRAM_USERNAME = `djaliedjalie_dekorasi`;
+        $EMAIL = `info@djaliedjalie.com`;
+        $GMAPS_LINK = ``;
+
+        $WHATSAPP_LINK = `https://wa.me/$WHATSAPP_NUMBER`;
+        $whatsapp_encode = function ($arg1) use ($WHATSAPP_LINK) {
+            $msg_template = 'Halo, saya mau tanya tentang ';
+            $msg = $msg_template . $arg1;
+            $encoded_msg = str_replace(' ', '%20', $msg);
+            echo `$WHATSAPP_LINK?text=$encoded_msg`;
+        };
+
+        $services = (object) [
+            'makeup' => [
+                'name' => 'Makeup',
+                'description' => 'Makeup',
+            ]
+        ];
+    @endphp
 </head>
 
 <body>
     <header class="header" id="header">
         <a href="#"><img src="./storage/logo.png" class="logo" id="navbar-logo" alt="Djalie Djalie"></a>
-        <nav class="navbar">
+        <nav class="navbar" id="navbar">
             <ul>
                 <li><a class="nav-link" href="#home">home</a></li>
                 <li><a class="nav-link" href="#about">about</a></li>
@@ -32,8 +56,8 @@
         </nav>
 
         <div class="icons">
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="{{$WHATSAPP_LINK}}"><i class="fab fa-whatsapp"></i></a>
+            <a href="{{$INSTAGRAM_LINK}}"><i class="fab fa-instagram"></i></a>
             <i class="fas fa-bars" id="menu"></i>
         </div>
     </header>
@@ -44,7 +68,7 @@
         <div class="content">
             <img src="./storage/logo-white.png" class="logo" alt="Djalie Djalie">
             <h1>Where your forever begins</h1>
-            <a href="#" class="btn">Consult with us</a>
+            <a href="#contact" class="btn">Consult with us</a>
         </div>
     </section>
     <!-- home end -->
@@ -96,7 +120,7 @@
                     artistic portraits, we ensure every precious memory is beautifully preserved for a lifetime.</p>
             </div>
         </div>
-        <a href="#" class="btn">Consult Now</a>
+        <a href="#contact" class="btn">Consult Now</a>
     </section>
     <!-- services end -->
 
@@ -200,10 +224,11 @@
             <div class="inputBox">
                 <input type="number" name="phone" placeholder="Phone Number">
                 <select name="service">
-                    <option value="" disabled selected>Select service</option>
+                    <option value="" disabled selected>Subject</option>
                     <option value="makeup">makeup</option>
                     <option value="decoration">decoration</option>
                     <option value="photography">photography</option>
+                    <option value="photography">others</option>
                 </select>
             </div>
 
@@ -211,7 +236,7 @@
                 <textarea name="message" cols="30" rows="10" placeholder="Your message..."></textarea>
             </div>
 
-            <a href="#" class="btn">send message</a>
+            <a href="#" class="btn">send message (WhatsApp)</a>
         </form>
     </section>
     <!-- contact end -->
@@ -224,17 +249,16 @@
             </div> -->
             <div class="box">
                 <h3>contact us</h3>
-                <a href="#"><i class="fas fa-phone"></i>+62-1234-5678-900</a>
-                <a href="#"><i class="fab fa-whatsapp"></i>+62-1234-5678-900</a>
-                <a href="#"><i class="fas fa-envelope"></i>info@djaliedjalie.com</a>
-                <a href="#"><i class="fas fa-map"></i>Jl. H. Nurisan, <br />Jakarta Selatan, DKI Jakarta, Indonesia</a>
+                <a href="{{$WHATSAPP_LINK}}"><i class="fab fa-whatsapp"></i>+{{$WHATSAPP_NUMBER}}</a>
+                <a href="mailto:{{$EMAIL}}"><i class="fas fa-envelope"></i>{{$EMAIL}}</a>
+                <a href="#"><i class="fas fa-map"></i>Jl. H. Nurisan, Jakarta Selatan, DKI Jakarta, Indonesia</a>
             </div>
 
             <div class="box">
                 <h3>our services</h3>
-                <a href="#"><i class="fas fa-chevron-right"></i>makeup</a>
-                <a href="#"><i class="fas fa-chevron-right"></i>decoration</a>
-                <a href="#"><i class="fas fa-chevron-right"></i>photography</a>
+                <a href="#"><i class="fas fa-chevron-right"></i>Makeup</a>
+                <a href="#"><i class="fas fa-chevron-right"></i>Decoration</a>
+                <a href="#"><i class="fas fa-chevron-right"></i>Photography</a>
             </div>
 
             <div class="box">

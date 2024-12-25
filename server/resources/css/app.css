@@ -9,8 +9,6 @@
     --light-black: #333;
     --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     --font-display: "Italiana", serif;
-
-    /* font-size: 16px; */
 }
 
 * {
@@ -291,7 +289,7 @@ footer {
 .home .content .logo {
     display: block;
     padding-bottom: 3.5rem;
-    max-height: 18rem;
+    max-height: 22rem;
     margin: 0 auto;
 }
 
@@ -612,5 +610,66 @@ footer .credits {
 footer .credits span {
     color: var(--primary-color);
 }
-
 /* footer end */
+
+/* media */
+@media screen and (max-width: 991px) {
+    html {
+        font-size: 55%;
+    }
+
+    .header {
+        padding: 2rem, 5rem;
+    }
+
+    section {
+        padding: 3rem;
+    }
+    
+    .home .content .logo {
+        max-height: 26rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #menu {
+        display: inline-block;
+    }
+
+    .header .navbar {
+        position: absolute;
+        top: 99%;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        display: none;
+    }
+
+    .header .navbar.active {
+        display: block;
+    }
+
+    .header .navbar ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav-link {
+        display: flex;
+        justify-content: center;
+        /* background: var(--white); */
+        border-radius: 0.5rem;
+        padding: 1.3rem;
+        margin: 1.3rem;
+        font-size: 2rem;
+    }
+    .home .content .h1 {
+        font-size: 4rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+}
