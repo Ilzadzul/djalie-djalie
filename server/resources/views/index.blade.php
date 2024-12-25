@@ -17,28 +17,6 @@
 
     @vite(['resources/js/app.js'])
 
-    <!-- vars -->
-    @php
-        $WHATSAPP_NUMBER = `62123123123`;
-        $INSTAGRAM_USERNAME = `djaliedjalie_dekorasi`;
-        $EMAIL = `info@djaliedjalie.com`;
-        $GMAPS_LINK = ``;
-
-        $WHATSAPP_LINK = `https://wa.me/$WHATSAPP_NUMBER`;
-        $whatsapp_encode = function ($arg1) use ($WHATSAPP_LINK) {
-            $msg_template = 'Halo, saya mau tanya tentang ';
-            $msg = $msg_template . $arg1;
-            $encoded_msg = str_replace(' ', '%20', $msg);
-            echo `$WHATSAPP_LINK?text=$encoded_msg`;
-        };
-
-        $services = (object) [
-            'makeup' => [
-                'name' => 'Makeup',
-                'description' => 'Makeup',
-            ]
-        ];
-    @endphp
 </head>
 
 <body>
@@ -56,8 +34,9 @@
         </nav>
 
         <div class="icons">
-            <a href="{{$WHATSAPP_LINK}}"><i class="fab fa-whatsapp"></i></a>
-            <a href="{{$INSTAGRAM_LINK}}"><i class="fab fa-instagram"></i></a>
+            <a href="{{config('djalie.WHATSAPP_LINK')}}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://instagram.com/{{config('djalie.INSTAGRAM_USERNAME')}}" target="_blank"><i
+                    class="fab fa-instagram"></i></a>
             <i class="fas fa-bars" id="menu"></i>
         </div>
     </header>
@@ -144,7 +123,7 @@
                     <li>Draped canopy tent (75 meters)</li>
                     <li>Plates, spoons, forks (150 sets)</li>
                 </ul>
-                <a href="#"><button class="btn">Consult</button></a>
+                <a href="#contact"><button class="btn">Consult</button></a>
             </div>
             <div class="box">
                 <h4 class="title">Home Package 2</h4>
@@ -215,16 +194,11 @@
     <!-- contact -->
     <section class="contact" id="contact">
         <h2 class="heading">contact us</h2>
-        <form action="">
+        <form action="" id="contactForm">
             <div class="inputBox">
-                <input type="text" name="name" placeholder="Full Name">
-                <input type="email" name="email" placeholder="Email">
-            </div>
-
-            <div class="inputBox">
-                <input type="number" name="phone" placeholder="Phone Number">
-                <select name="service">
-                    <option value="" disabled selected>Subject</option>
+                <input type="text" name="name" id="name" placeholder="Name *" >
+                <select name="service" id="service">
+                    <option value="" selected>Select Subject *</option>
                     <option value="makeup">makeup</option>
                     <option value="decoration">decoration</option>
                     <option value="photography">photography</option>
@@ -233,10 +207,16 @@
             </div>
 
             <div class="inputBox">
-                <textarea name="message" cols="30" rows="10" placeholder="Your message..."></textarea>
+                <input type="email" name="email" id="email" placeholder="Email" >
+                <input type="number" name="phone" id="phone" placeholder="Phone Number">
             </div>
 
-            <a href="#" class="btn">send message (WhatsApp)</a>
+            <div class="inputBox">
+                <textarea name="message" cols="30" rows="10" placeholder="Your message... *" ></textarea>
+            </div>
+            <input type="hidden" name="link" value="{{config('djalie.WHATSAPP_LINK')}}">
+
+            <button type="submit" class="btn">send message (WhatsApp)</button>
         </form>
     </section>
     <!-- contact end -->
@@ -249,9 +229,12 @@
             </div> -->
             <div class="box">
                 <h3>contact us</h3>
-                <a href="{{$WHATSAPP_LINK}}"><i class="fab fa-whatsapp"></i>+{{$WHATSAPP_NUMBER}}</a>
-                <a href="mailto:{{$EMAIL}}"><i class="fas fa-envelope"></i>{{$EMAIL}}</a>
-                <a href="#"><i class="fas fa-map"></i>Jl. H. Nurisan, Jakarta Selatan, DKI Jakarta, Indonesia</a>
+                <a href="{{config('djalie.WHATSAPP_LINK')}}" target="_blank"><i
+                        class="fab fa-whatsapp"></i>+{{config('djalie.WHATSAPP_NUMBER')}}</a>
+                <a href="mailto:{{config('djalie.EMAIL')}}"><i
+                        class="fas fa-envelope"></i>{{config('djalie.EMAIL')}}</a>
+                <a href="{{config('djalie.GMAPS_LINK')}}" target="_blank"><i class="fas fa-map"></i>Jl. H. Nurisan,
+                    Jakarta Selatan, DKI Jakarta, Indonesia</a>
             </div>
 
             <div class="box">
@@ -263,7 +246,8 @@
 
             <div class="box">
                 <h3>follow us</h3>
-                <a href="#"><i class="fab fa-instagram"></i>@djaliedjalie</a>
+                <a href="https://instagram.com/{{config('djalie.INSTAGRAM_USERNAME')}}" target="_blank"><i
+                        class="fab fa-instagram"></i>{{config('djalie.INSTAGRAM_USERNAME')}}</a>
             </div>
         </div>
         <div class="credits">&copy;
@@ -275,6 +259,47 @@
 
 
     <!-- scripts -->
+    <script type="text/javascript">
+        let contactForm = document.getElementById("contactForm");
+        contactForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            let name = document.querySelector('[name="name"]').value;
+            let email = document.querySelector('[name="email"]').value;
+            let phone = document.querySelector('[name="phone"]').value;
+            let service = document.querySelector('[name="service"]').value;
+            let message = document.querySelector('[name="message"]').value;
+            let wa = document.querySelector('[name="link"]').value;
+
+            var msg = `Nama:%20${name}%0AEmail:%20${email}%0ANomor%20Telepon:%20${phone}%0ASubject:%20${service}%0A${message}`;
+            var link = `${wa}?text=${msg}`;
+            window.open(link, "_blank");
+        })
+    </script>
+
+
+    <!-- <script type="text/javascript">
+        function onSubmit() {
+            var name = document.getElementById().value;
+            var email = document.querySelector('[name="email"]').value;
+            var phone = document.querySelector('[name="phone"]').value;
+            var service = document.querySelector('[name="service"]').value;
+            var message = document.querySelector('[name="message"]').value;
+            alert(name);
+
+            var wa = config('djalie.WHATSAPP_LINK');
+
+            var encoded_msg = encodeURI(message);
+            var msg = `
+                Nama: $name%0A
+                Email: $email%0A
+                Nomor Telepon: $phone%0A
+                Subject: $service%0A
+                ${encoded_msg}
+                `;
+            var link `${wa}?text=${msg}`;
+            window.open(link, "_blank");
+        }
+    </script> -->
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
